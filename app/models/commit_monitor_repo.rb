@@ -25,6 +25,16 @@ class CommitMonitorRepo < ActiveRecord::Base
     end
   end
 
+  def create_pr_branch!(branch_name, last_commit, commit_uri)
+    branches.create!(
+      :name         => branch_name,
+      :last_commit  => last_commit,
+      :commits_list => [],
+      :commit_uri   => commit_uri,
+      :pull_request => true
+    )
+  end
+
   def fq_name
     "#{upstream_user}/#{name}"
   end
@@ -41,6 +51,14 @@ class CommitMonitorRepo < ActiveRecord::Base
 
   def path=(val)
     super(File.expand_path(val))
+  end
+
+  def pr_branches
+    branches.select(&:pull_request?)
+  end
+
+  def pr_branches_include?(branch_name)
+    pr_branches.collect(&:name).include?(branch_name)
   end
 
   def with_git_service
