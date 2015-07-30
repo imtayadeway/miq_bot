@@ -12,7 +12,7 @@ class PullRequestMonitorWorker
     if !first_unique_worker?
       logger.info "#{self.class} is already running, skipping"
     else
-      PullRequestMonitor.new.process_repos
+      PullRequestMonitor.process_repos
     end
   end
 end
