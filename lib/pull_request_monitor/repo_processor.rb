@@ -5,7 +5,7 @@ module PullRequestMonitor
     def initialize(repo)
       @repo = repo
       repo.with_git_service { |git| @git = git }
-      repo_with_github_service { |github| @github = github }
+      repo.with_github_service { |github| @github = github }
     end
 
     def process
