@@ -10,10 +10,14 @@ module PullRequestMonitor
 
     def process
       branch_name = git.pr_branch(pr.number)
-      return if repo.pr_branches_include?(branch_name)
-      git.create_pr_branch(branch_name)
-      last_commit = git.merge_base(branch_name, "master")
-      repo.create_pr_branch!(branch_name, last_commit, commit_uri)
+
+      unless repo.pr_branches_include?(branch_name)
+        git.create_pr_branch(branch_name)
+        last_commit = git.merge_base(branch_name, "master")
+        repo.create_pr_branch!(branch_name, last_commit, commit_uri)
+      end
+
+      branch_name
     end
 
     private
