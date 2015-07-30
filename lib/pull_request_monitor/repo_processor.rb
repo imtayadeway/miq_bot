@@ -2,26 +2,22 @@ module PullRequestMonitor
   class RepoProcessor
     attr_reader :repo, :git, :github
 
-    def initialize(repo)
+    def initialize(repo, git, github)
       @repo = repo
-      repo.with_git_service { |git| @git = git }
-      repo.with_github_service { |github| @github = github }
+      @git = git
+      @github = github
     end
 
     def process
       git.checkout("master")
       git.pull
 
-      original_pr_branches = pr_branches
+      original_pr_branches = repo.pr_branch_names
       current_pr_branches  = process_prs
       delete_pr_branches(original_pr_branches - current_pr_branches)
     end
 
     private
-
-    def pr_branches
-      repo.branches.select(&:pull_request?).collect(&:name)
-    end
 
     def process_prs
       github.pull_requests.all.collect do |pr|
@@ -32,7 +28,7 @@ module PullRequestMonitor
     def delete_pr_branches(branch_names)
       return if branch_names.empty?
 
-      repo.branches.where(:name => branch_names).destroy_all
+      repo.destroy_all_branches(branch_names)
 
       git.checkout("master")
       branch_names.each { |branch_name| git.destroy_branch(branch_name) }

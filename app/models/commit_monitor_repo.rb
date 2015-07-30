@@ -57,8 +57,16 @@ class CommitMonitorRepo < ActiveRecord::Base
     branches.select(&:pull_request?)
   end
 
+  def pr_branch_names
+    pr_branches.collect(&:name)
+  end
+
   def pr_branches_include?(branch_name)
-    pr_branches.collect(&:name).include?(branch_name)
+    pr_branch_names.include?(branch_name)
+  end
+
+  def destroy_all_branches(branch_names)
+    branches.destroy_all(:name => branch_names)
   end
 
   def with_git_service
