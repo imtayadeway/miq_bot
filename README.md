@@ -27,14 +27,14 @@ The ManageIQ bot is the ManageIQ team's helper to automate various developer pro
 The bot will react to direct messages in GitHub issues, performing actions on
 your behalf which would otherwise not be possible without commit rights to the
 repo. Just add a comment to any issue in a monitored repo, with each request on
-its own line, in the form `@miq-bot command params`.  Available commands are
-below.  Any command can also be pluralized, where sensible, or have the
-underscores replaced with hyphens.
+its own line, in the form `@miq-bot command params`.  Multiple params should be
+comma-separated. Available commands are below.  Any command can also be
+pluralized, where sensible, or have the underscores replaced with hyphens.
 
 Command | Description | Example
 --- | --- | ---
-`add_label` | Add one or more labels to an issue.  Multiple labels should be comma-separated. | `@miq-bot add_label label1, label2, label3`
-`remove_label`/`rm_label` | Remove one or more labels to an issue. Multiple labels should be comma-separated. | `@miq-bot remove_label label1, label2, label3`
+`add_label` | Add one or more labels to an issue. | `@miq-bot add_label label1, label2, label3`
+`remove_label`/`rm_label` | Remove one or more labels from an issue. | `@miq-bot remove_label label1, label2, label3`
 `assign` | Assign the issue to the specified user.  The leading `@` for the user is optional.  The user must be in the organization, and must have publicized their membership in order to be assigned. | `@miq-bot assign @user`
 `set_milestone` | Set the specified milestone on the issue. Do not wrap the milestone in quotes. | `@miq-bot set_milestone Sprint 27`
 
