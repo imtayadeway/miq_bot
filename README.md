@@ -31,17 +31,13 @@ its own line, in the form `@miq-bot command params`.  Available commands are
 below.  Any command can also be pluralized, where sensible, or have the
 underscores replaced with hyphens.
 
-- `add_label`: Add one or more labels to an issue.  Multiple labels should be
-  comma-separated.  e.g. `@miq-bot add_label label1, label2, label3`
-- `remove_label` (or `rm_label`): Remove one or more labels to an issue.
-  Multiple labels should be comma-separated.  e.g.
-  `@miq-bot remove_label label1, label2, label3`
-- `assign`: Assign the issue to the specified user.  The leading `@` for the
-  user is optional.  The user must be in the organization, and must have
-  publicized their membership in order to be assigned.  e.g.
-  `@miq-bot assign @user`
-- `set_milestone`: Set the specified milestone on the issue. Do not wrap the
-  milestone in quotes.  e.g. `@miq-bot set_milestone Sprint 27`
+Command | Description | Example
+--- | --- | ---
+`add_label` | Add one or more labels to an issue.  Multiple labels should be comma-separated. | `@miq-bot add_label label1, label2, label3`
+`remove_label`/`rm_label` | Remove one or more labels to an issue. Multiple labels should be comma-separated. | `@miq-bot remove_label label1, label2, label3`
+`assign` | Assign the issue to the specified user.  The leading `@` for the user is optional.  The user must be in the organization, and must have publicized their membership in order to be assigned. | `@miq-bot assign @user`
+`set_milestone` | Set the specified milestone on the issue. Do not wrap the milestone in quotes. | `@miq-bot set_milestone Sprint 27`
+
 
 ## Development
 
